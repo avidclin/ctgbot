@@ -1,2 +1,4 @@
 # ctgbot
-Get news on Teams channel whenever new studies appear on clinicaltrials.gov
+> Automatic notifications about new studies on clinicaltrials.gov  
+ 
+Get news on Teams channel every time new studies for defined queries appear on clinicaltrials.gov
