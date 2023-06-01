@@ -1,0 +1,35 @@
+# This a sample configuration file for ctgbot.py.
+# Copy to ctgbot.ini in the directory as ctgbot.py and adjust accordingly.
+#
+# Note: if main script is renamed to <other_name>.py then
+#   - it will search for <other_name>.ini configuration file first
+#   - then fallback to ctgbot.ini
+#   - report an error and exit if neither of the two are found.
+
+[Sections]
+# Choose which section stores configuration for input and output data streams, and data cache.
+Database = SQLite
+Input = clinicaltrials.gov
+Output = Microsoft Teams
+
+[SQLite]
+# This is optional. Defaults to <script_name>.db with a fallback to ctgov.db
+Database Path = ctgov.db
+
+[Run]
+# Default parameter string. The string given on execution overrides the setting fully, not option by option.
+Argv =
+
+[clinicaltrials.gov]
+# Use https://beta.clinicaltrials.gov/data-about-studies/learn-about-api to build API query
+# Go to the "/studies" endpoint, fill in the form, press Try and copy-paste url from the CURL tab
+Head or neck pain = https://beta.clinicaltrials.gov/api/v2/studies?format=json&query.parser=advanced&query.cond=%28head+OR+neck%29+AND+pain&filter.advanced=AREA%5BLeadSponsorClass%5DINDUSTRY+AND+AREA%5BStudyFirstSubmitDate%5DRANGE%5B2020%2C+MAX%5D&fields=NCTId%2CLeadSponsorName%2CBriefTitle%2CStudyFirstSubmitDate%2CInterventionType%2CInterventionName%2CLeadSponsorClass&sort=StudyFirstSubmitDate%3Adesc&countTotal=true&pageSize=200
+Schizophrenia = https://beta.clinicaltrials.gov/api/v2/studies?format=json&query.parser=simple&query.cond=schizophrenia&filter.advanced=AREA%5BLeadSponsorClass%5DINDUSTRY+AND+AREA%5BStudyFirstSubmitDate%5DRANGE%5B2020%2C+MAX%5D&fields=NCTId%2CLeadSponsorName%2CBriefTitle%2CStudyFirstSubmitDate%2CInterventionType%2CInterventionName%2CLeadSponsorClass&sort=StudyFirstSubmitDate%3Adesc&countTotal=true&pageSize=200
+
+# Although API supports ANDs and ORs, it's allowed to join multiple requests into a logical query
+Dermatomyositis and Polymyositis =
+    https://beta.clinicaltrials.gov/api/v2/studies?format=json&query.parser=simple&query.cond=dermatomyositis&filter.advanced=AREA%5BLeadSponsorClass%5DINDUSTRY+AND+AREA%5BStudyFirstSubmitDate%5DRANGE%5B2020%2C+MAX%5D&fields=NCTId%2CLeadSponsorName%2CBriefTitle%2CStudyFirstSubmitDate%2CInterventionType%2CInterventionName%2CLeadSponsorClass&sort=StudyFirstSubmitDate%3Adesc&countTotal=true&pageSize=200
+    https://beta.clinicaltrials.gov/api/v2/studies?format=json&query.parser=simple&query.cond=polymyositis&filter.advanced=AREA%5BLeadSponsorClass%5DINDUSTRY+AND+AREA%5BStudyFirstSubmitDate%5DRANGE%5B2020%2C+MAX%5D&fields=NCTId%2CLeadSponsorName%2CBriefTitle%2CStudyFirstSubmitDate%2CInterventionType%2CInterventionName%2CLeadSponsorClass&sort=StudyFirstSubmitDate%3Adesc&countTotal=true&pageSize=200
+
+[Microsoft Teams]
+Incoming Webhook = https://accelsiors.webhook.office.com/webhookb2/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx@xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/IncomingWebhook/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
