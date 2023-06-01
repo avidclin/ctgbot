@@ -166,3 +166,6 @@ cython_debug/
 sandbox/
 #  Do test runs in run.py
 run.py
+# Place persistent storage in cache on runs
+cache/
+
